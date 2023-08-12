@@ -1,9 +1,6 @@
-from typing import Any
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
-from django.shortcuts import redirect, render
-from django.views.generic import ListView, TemplateView, CreateView
-from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
+from django.shortcuts import redirect
+from django.views.generic import ListView, CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import TaskModelForm
 from .models import TaskModel
 from django.urls import reverse_lazy
