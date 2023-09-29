@@ -56,10 +56,13 @@ class UserBankAccountUpdateView(View):
 def Profile_View(request):
     data = Profile.objects.all()
     if request.method == "POST":
-        form = ProfileForm(request.POST)
-        if form.is_valid:
+        print(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
             form.save()
             return redirect("photos")
+        else:
+            print(form.errors)
     else:
         form = ProfileForm()
-    return render(request, "profile_views.html", {"data": data, "form:": form})
+    return render(request, "accounts/profile_views.html", {"data": data, "form": form})
