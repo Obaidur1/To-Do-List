@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import FormView
-from .forms import UserRegistrationForm, UserUpdateForm
+from .forms import UserRegistrationForm, UserUpdateForm, ProfileForm
 from django.contrib.auth import login, logout
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.shortcuts import redirect
+from .models import Profile
 
 
 class UserRegistrationView(FormView):
@@ -50,3 +51,15 @@ class UserBankAccountUpdateView(View):
             form.save()
             return redirect("profile")  # Redirect to the user's profile page
         return render(request, self.template_name, {"form": form})
+
+
+def Profile_View(request):
+    data = Profile.objects.all()
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid:
+            form.save()
+            return redirect("photos")
+    else:
+        form = ProfileForm()
+    return render(request, "profile_views.html", {"data": data, "form:": form})

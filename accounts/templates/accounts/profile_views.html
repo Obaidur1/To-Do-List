@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %} {% if
+form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %}
+<div class="bg-white px-3 py-4 rounded-xl my-6 flex">
+
+    {% for d in data %}
+    <div class="p-6 m-6 ">
+        <h1>{{d.name}}</h1>
+        <img src="{{d.photo}}" alt="" srcset="">
+    </div>
+    {% endfor %}
+
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+    </form>
+</div>
+{% endblock %}

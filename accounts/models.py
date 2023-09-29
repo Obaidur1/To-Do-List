@@ -27,3 +27,8 @@ class UserAddress(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+class Profile(models.Model):
+    name = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to="Photos/")
