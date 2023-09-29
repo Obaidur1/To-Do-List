@@ -7,6 +7,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views import View
 from django.shortcuts import redirect
 from .models import Profile
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 
 class UserRegistrationView(FormView):
@@ -38,13 +40,12 @@ class UserLogoutView(LogoutView):
         return reverse_lazy("login")
 
 
+@method_decorator(login_required, name="dispatch")
 class UserBankAccountUpdateView(View):
     template_name = "accounts/profile.html"
 
     def get(self, request):
         form = UserUpdateForm(instance=request.user)
-        if request.user is None:
-            return redirect("login")
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):

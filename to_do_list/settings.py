@@ -89,6 +89,7 @@ DATABASES = {
         conn_max_age=600,
     )
 }
+LOGIN_URL = "login"  # Use the name of your login URL pattern
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
