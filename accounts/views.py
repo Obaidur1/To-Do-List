@@ -40,10 +40,11 @@ class UserLogoutView(LogoutView):
 
 class UserBankAccountUpdateView(View):
     template_name = "accounts/profile.html"
-    login_required = True
 
     def get(self, request):
         form = UserUpdateForm(instance=request.user)
+        if request.user is None:
+            return redirect("login")
         return render(request, self.template_name, {"form": form})
 
     def post(self, request):
